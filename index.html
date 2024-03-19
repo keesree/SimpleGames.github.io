@@ -5,27 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Breakout Game</title>
     <style>
-        body {
+        body, html {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: black; /* Changed background color to black */
+            height: 100%;
         }
         canvas {
-            border: 1px solid black;
+            display: block;
+            margin: auto;
+            background-color: black;
         }
     </style>
 </head>
 <body>
-    <canvas id="breakoutCanvas" width="480" height="320"></canvas>
+    <canvas id="breakoutCanvas"></canvas>
 
     <script>
         const canvas = document.getElementById("breakoutCanvas");
         const ctx = canvas.getContext("2d");
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
         const ballRadius = 10;
         let x = canvas.width / 2;
@@ -33,8 +34,8 @@
         let dx = 2;
         let dy = -2;
 
-        const paddleHeight = 15; /* Made the paddle taller */
-        const paddleWidth = 100; /* Made the paddle wider */
+        const paddleHeight = 15;
+        const paddleWidth = 120;
         let paddleX = (canvas.width - paddleWidth) / 2;
 
         let rightPressed = false;
@@ -52,7 +53,7 @@
         for (let c = 0; c < brickColumnCount; c++) {
             bricks[c] = [];
             for (let r = 0; r < brickRowCount; r++) {
-                bricks[c][r] = { x: 0, y: 0, status: 1, color: `hsl(${360 * Math.random()}, 100%, 50%)` }; /* Rainbow neon colored blocks */
+                bricks[c][r] = { x: 0, y: 0, status: 1, color: `hsl(${360 * Math.random()}, 100%, 50%)` };
             }
         }
 
@@ -113,7 +114,7 @@
         function drawPaddle() {
             ctx.beginPath();
             ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-            ctx.fillStyle = "#ffffff"; /* Made the paddle white */
+            ctx.fillStyle = "#ffffff";
             ctx.fill();
             ctx.closePath();
         }
@@ -128,7 +129,7 @@
                         bricks[c][r].y = brickY;
                         ctx.beginPath();
                         ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                        ctx.fillStyle = bricks[c][r].color; /* Used rainbow neon colors */
+                        ctx.fillStyle = bricks[c][r].color;
                         ctx.fill();
                         ctx.closePath();
                     }
