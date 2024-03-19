@@ -34,7 +34,7 @@
         let dx = 2;
         let dy = -2;
 
-        const paddleHeight = 15;
+        const paddleHeight = 20; /* Made the paddle thicker */
         const paddleWidth = 120;
         let paddleX = (canvas.width - paddleWidth) / 2;
 
@@ -42,12 +42,12 @@
         let leftPressed = false;
 
         const brickRowCount = 3;
-        const brickColumnCount = 5;
-        const brickWidth = 75;
+        const brickColumnCount = Math.floor(canvas.width / (75 + 10)); /* Adjusted to cover entire width */
+        const brickWidth = (canvas.width - (brickColumnCount - 1) * 10) / brickColumnCount;
         const brickHeight = 20;
         const brickPadding = 10;
         const brickOffsetTop = 30;
-        const brickOffsetLeft = 30;
+        const brickOffsetLeft = (canvas.width % (brickWidth + brickPadding)) / 2;
 
         const bricks = [];
         for (let c = 0; c < brickColumnCount; c++) {
